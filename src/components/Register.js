@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import ListErrors from './ListErrors';
 import React from 'react';
 import { inject, observer } from 'mobx-react';
+import Header from './Header';
 
 @inject('authStore')
 @observer
@@ -12,7 +13,6 @@ export default class Register extends React.Component {
   }
 
   handleUsernameChange = e => this.props.authStore.setUsername(e.target.value);
-  handleEmailChange = e => this.props.authStore.setEmail(e.target.value);
   handlePasswordChange = e => this.props.authStore.setPassword(e.target.value);
   handleSubmitForm = (e) => {
     e.preventDefault();
@@ -24,65 +24,58 @@ export default class Register extends React.Component {
     const { values, errors, inProgress } = this.props.authStore;
 
     return (
-      <div className="auth-page">
-        <div className="container page">
-          <div className="row">
+      <div>
+        <Header />
+        <div className="auth-page">
+          <div className="container page">
+            <div className="row">
 
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign Up</h1>
-              <p className="text-xs-center">
-                <Link to="login">
-                  Have an account?
+              <div className="col-md-6 offset-md-3 col-xs-12">
+                <h1 className="text-xs-center">注册</h1>
+                <p className="text-xs-center">
+                  <Link to='/'>
+                    已经有账号了?
                 </Link>
-              </p>
+                </p>
 
-              <ListErrors errors={errors} />
+                <ListErrors errors={errors} />
 
-              <form onSubmit={this.handleSubmitForm}>
-                <fieldset>
+                <form onSubmit={this.handleSubmitForm}>
+                  <fieldset>
 
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      placeholder="Username"
-                      value={values.username}
-                      onChange={this.handleUsernameChange}
-                    />
-                  </fieldset>
+                    <fieldset className="form-group">
+                      <input
+                        className="form-control form-control-lg"
+                        type="text"
+                        placeholder="用户名"
+                        value={values.username}
+                        onChange={this.handleUsernameChange}
+                      />
+                    </fieldset>
 
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                      placeholder="Email"
-                      value={values.email}
-                      onChange={this.handleEmailChange}
-                    />
-                  </fieldset>
+                    <fieldset className="form-group">
+                      <input
+                        className="form-control form-control-lg"
+                        type="password"
+                        placeholder="密码"
+                        value={values.password}
+                        onChange={this.handlePasswordChange}
+                      />
+                    </fieldset>
 
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="Password"
-                      value={values.password}
-                      onChange={this.handlePasswordChange}
-                    />
-                  </fieldset>
-
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    type="submit"
-                    disabled={inProgress}
-                  >
-                    Sign in
+                    <button
+                      className="btn btn-lg btn-primary pull-xs-right"
+                      type="submit"
+                      disabled={inProgress}
+                    >
+                      确认
                   </button>
 
-                </fieldset>
-              </form>
-            </div>
+                  </fieldset>
+                </form>
+              </div>
 
+            </div>
           </div>
         </div>
       </div>
